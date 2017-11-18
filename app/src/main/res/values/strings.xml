@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Distribution</string>
+    <string name="app_name">点点配送</string>
+    <string name="my_Button">我的</string>
+    <string name="Button_Car">退货车</string>
+    <string name="Order_Botton">订单</string>
+    <string name="Home_Button">首页</string>
 </resources>

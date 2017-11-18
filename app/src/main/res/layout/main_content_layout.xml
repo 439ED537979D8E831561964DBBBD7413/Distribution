@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/title_layout" />
+
+    <android.support.v4.view.ViewPager
+    android:id="@+id/M_Vp"
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_height="0dp" />
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:layout_above="@id/Home_RG"
+    android:background="@color/text_normal" />
+    <RadioGroup
+    android:id="@+id/Home_RG"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_height"
+    android:layout_alignParentBottom="true"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+
+    <RadioButton
+    android:id="@+id/Home"
+    style="@style/Home_Botton"
+    android:checked="true"
+    android:drawableTop="@drawable/tab_home"
+    android:text="@string/Home_Button"
+    android:textColor="@color/text_bg_color" />
+
+    <RadioButton
+    android:id="@+id/Order"
+    style="@style/Home_Botton"
+    android:drawableTop="@drawable/tab_order"
+    android:text="@string/Order_Botton"
+    android:textColor="@color/text_bg_color" />
+
+    <RadioButton
+    android:id="@+id/return_car"
+    style="@style/Home_Botton"
+    android:drawableTop="@drawable/tab_return_car"
+    android:text="@string/Button_Car"
+    android:textColor="@color/text_bg_color" />
+
+    <RadioButton
+    android:id="@+id/My"
+    style="@style/Home_Botton"
+    android:drawableTop="@drawable/tab_my"
+    android:text="@string/my_Button"
+    android:textColor="@color/text_bg_color" />
+    </RadioGroup>
+</LinearLayout>

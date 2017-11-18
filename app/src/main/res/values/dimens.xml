@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="hight_50">50dp</dimen>
+    <dimen name="width_60dp">60dp</dimen>
+    <dimen name="time_select_size">14sp</dimen>
+    <dimen name="title_height">49dp</dimen>
+    <dimen name="height_180dp">180dp</dimen>
+</resources>
