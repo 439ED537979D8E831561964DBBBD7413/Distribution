@@ -4,4 +4,8 @@
     <string name="Button_Car">退货车</string>
     <string name="Order_Botton">订单</string>
     <string name="Home_Button">首页</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

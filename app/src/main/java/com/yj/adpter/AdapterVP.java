@@ -8,35 +8,25 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 /**
  * Created by Administrator on 2017/7/22 0022.
+ *
+ * @author LK
  */
 
 public class AdapterVP extends FragmentPagerAdapter {
+    private Fragment[] fragmentList;
 
-    public AdapterVP(FragmentManager fm) {
+    public AdapterVP(FragmentManager fm, Fragment[] fragmentList) {
         super(fm);
+        this.fragmentList = fragmentList;
     }
 
     @Override
     public Fragment getItem(int position) {
-//        switch (position) {
-//            case 0:
-//                HomeFragment Hfragment = new HomeFragment();
-//                return Hfragment;
-//            case 1:
-//                OrderFragment ofragment = new OrderFragment();
-//                return ofragment;
-//            case 2:
-//                ReturnFragment rfragment = new ReturnFragment();
-//                return rfragment;
-//            case 3:
-//                MyFragment mfragment = new MyFragment();
-//                return mfragment;
-//        }
-        return null;
+        return fragmentList[position];
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return fragmentList.length;
     }
 }
