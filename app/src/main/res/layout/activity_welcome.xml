@@ -9,13 +9,18 @@
         android:id="@+id/welcome_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="fitXY"
         android:src="@drawable/home"/>
     <TextView
         android:id="@+id/CountdownText"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_alignParentRight="true"
-        android:text=""/>
+        android:layout_alignParentBottom="true"
+        android:text=""
+        android:padding="2dp"
+        android:background="@drawable/button_bgshape"
+        android:textColor="@color/white"/>
 </RelativeLayout>

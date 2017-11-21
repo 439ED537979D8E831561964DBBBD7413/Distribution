@@ -48,11 +48,5 @@
             android:text="@string/Button_Car"
             android:textColor="@color/text_bg_color" />
 
-        <RadioButton
-            android:id="@+id/my_interface"
-            style="@style/Home_Botton"
-            android:drawableTop="@drawable/tab_my"
-            android:text="@string/my_Button"
-            android:textColor="@color/text_bg_color" />
     </RadioGroup>
 </LinearLayout>

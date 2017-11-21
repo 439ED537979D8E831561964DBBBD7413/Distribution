@@ -1,4 +1,4 @@
-package com.yj.aplication;
+package com.yj.application;
 
 import android.app.Application;
 
@@ -10,7 +10,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  * @author LK
  */
 
-public class myaplication extends Application {
+public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();

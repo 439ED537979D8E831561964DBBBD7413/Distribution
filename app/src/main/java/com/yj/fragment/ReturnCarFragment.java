@@ -14,7 +14,6 @@ import com.yj.distribution.R;
  */
 public class ReturnCarFragment extends BaseFragment {
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_return_car;

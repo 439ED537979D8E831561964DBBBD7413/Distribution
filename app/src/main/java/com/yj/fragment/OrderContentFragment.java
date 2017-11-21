@@ -14,9 +14,6 @@ import com.yj.distribution.R;
  * @author LK
  */
 public class OrderContentFragment extends BaseFragment {
-    public static final int TYPE_AUDIT = 0;
-    public static final int TYPE_DISTRIBTNION = 1;
-    public static final int TYPE_SUCCEED = 2;
 
     public static OrderContentFragment newInstance(int type) {
         return newInstance(type, false);
