@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
+import com.yj.util.ShowLog;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -22,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     Unbinder unbinder;
     protected LayoutInflater inflater;
     public static Toast mToast;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +54,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initData();
 
     protected void showToast(String msg) {
-        if(mToast==null){
-            mToast=Toast.makeText(mcontext, msg, Toast.LENGTH_SHORT);
-        }else {
+        if (mToast == null) {
+            mToast = Toast.makeText(mcontext, msg, Toast.LENGTH_SHORT);
+        } else {
             mToast.setText(msg);
         }
         mToast.show();
+    }
+
+    protected void showLog(String msg) {
+        ShowLog.e(msg);
     }
 }

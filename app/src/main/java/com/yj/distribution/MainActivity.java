@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     EditText searchEdit;
     @BindView(R.id.navigationview)
     NavigationView navigationview;
+    @BindView(R.id.title_right_img)
+    ImageView titleRightImg;
     private long firstTime = 0;
 
     @Override
@@ -89,6 +92,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case Constant.RETURNCAR:
                 removeView(false);
                 titleView.setText("退货车");
+                titleRight.setVisibility(View.GONE);
+                titleRightImg.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;
@@ -97,6 +102,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     private void removeView(boolean isSearchBox) {
         titleContentLayout.removeAllViews();
+        titleRight.setText("");
+        titleRight.setVisibility(View.VISIBLE);
+        if(titleRightImg.getVisibility()==View.VISIBLE){
+            titleRightImg.setVisibility(View.GONE);
+        }
         if (isSearchBox) {
             titleContentLayout.addView(rootView);
         } else {
@@ -158,6 +168,12 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     }
 
+    /**
+     * 侧边栏菜单监听
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -182,13 +198,19 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                long secondTime = System.currentTimeMillis();
-                if (secondTime - firstTime > Constant.EXITTIME) {
-                    Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-                    firstTime = secondTime;
+                if (drawerlayout.isDrawerOpen(Gravity.START)) {
+                    drawerlayout.closeDrawer(Gravity.START);
                     return true;
-                } else {//两次按键小于2秒时，退出应用  
-                    System.exit(0);
+                } else {
+                    long secondTime = System.currentTimeMillis();
+                    if (secondTime - firstTime > Constant.EXITTIME) {
+                        Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                        firstTime = secondTime;
+                        return true;
+                    } else {//两次按键小于2秒时，退出应用  
+                        System.exit(0);
+                    }
+
                 }
                 break;
             default:
@@ -198,13 +220,4 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         return super.onKeyUp(keyCode, event);
     }
 
-    @Override
-    public void onBackPressed() {
-        if (drawerlayout.isDrawerOpen(Gravity.START)) {
-            drawerlayout.closeDrawer(Gravity.START);
-        } else {
-            super.onBackPressed();
-        }
-
-    }
 }

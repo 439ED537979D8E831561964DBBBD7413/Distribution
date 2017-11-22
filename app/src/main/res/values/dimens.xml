@@ -5,4 +5,6 @@
     <dimen name="time_select_size">14sp</dimen>
     <dimen name="title_height">49dp</dimen>
     <dimen name="height_180dp">180dp</dimen>
+    <dimen name="refresh_header_height_twitter">60dp</dimen>
+    <dimen name="load_more_footer_height_classic">60dp</dimen>
 </resources>

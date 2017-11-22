@@ -7,5 +7,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <array name="fragment_name">
+        <item>待审核</item>
+        <item>正在配货</item>
+        <item>配送成功</item>
+    </array>
 </resources>

@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yj.util.ShowLog;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
  * Created by LK on 2017/8/30.
+ *
  * @author LK
  */
 
@@ -113,4 +116,7 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
+    protected void showLog(String msg) {
+        ShowLog.e(msg);
+    }
 }
