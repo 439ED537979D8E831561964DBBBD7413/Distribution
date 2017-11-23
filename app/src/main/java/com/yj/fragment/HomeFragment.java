@@ -43,9 +43,6 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
     @Override
     protected void initData() {
         swipeToLoadLayout.setRefreshing(true);
-        for (int i = 0; i < 10; i++) {
-            mlist.add("item" + i);
-        }
         swipeTarget.setLayoutManager(new LinearLayoutManager(mActivity));
         adapter = new HomeRecyAdapter(mActivity, mlist);
         swipeTarget.setAdapter(adapter);
@@ -79,12 +76,12 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
                 //设置是否上拉刷新
                 showLog("下拉刷新");
                 for (int i = 0; i < 10; i++) {
-                    mlist.add("刷新" + i);
+                    mlist.add("数据" + i);
                 }
                 adapter.notifyDataSetChanged();
                 swipeToLoadLayout.setRefreshing(false);
             }
-        }, 2000);
+        }, 1000);
 
     }
 

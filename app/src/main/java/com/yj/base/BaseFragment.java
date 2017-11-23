@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.yj.util.ShowLog;
 
@@ -23,7 +24,7 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment {
 
     protected Activity mActivity;
-
+    public static Toast mToast;
     Unbinder unbinder;
 
     /**
@@ -59,7 +60,6 @@ public abstract class BaseFragment extends Fragment {
         initView(view, savedInstanceState);
         mIsPrepare = true;
         onLazyLoad();
-        init();
 
     }
 
@@ -78,8 +78,6 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void initData();
 
-    protected void init() {
-    }
 
     @Override
     public void onDestroyView() {
@@ -115,7 +113,14 @@ public abstract class BaseFragment extends Fragment {
         }
 
     }
-
+    protected void showToast(String msg) {
+        if (mToast == null) {
+            mToast = Toast.makeText(mActivity, msg, Toast.LENGTH_SHORT);
+        } else {
+            mToast.setText(msg);
+        }
+        mToast.show();
+    }
     protected void showLog(String msg) {
         ShowLog.e(msg);
     }

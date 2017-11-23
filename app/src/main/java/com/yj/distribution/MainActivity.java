@@ -179,6 +179,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_news:
+
                 break;
             default:
                 break;
