@@ -24,7 +24,7 @@ import butterknife.BindView;
  *
  * @author LK
  */
-public class OrderContentFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener {
+public class OrderContentFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener ,HomeRecyAdapter.OnViewClickListener{
 
     @BindView(R.id.swipe_target)
     RecyclerView swipeTarget;
@@ -68,7 +68,7 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
     protected void initData() {
         swipeToLoadLayout.setRefreshing(true);
         swipeTarget.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new HomeRecyAdapter(mActivity, mlist);
+        adapter = new HomeRecyAdapter(mActivity, mlist,this);
         swipeTarget.setAdapter(adapter);
     }
 
@@ -114,5 +114,10 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
         if (swipeToLoadLayout.isLoadingMore()) {
             swipeToLoadLayout.setLoadingMore(false);
         }
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+
     }
 }

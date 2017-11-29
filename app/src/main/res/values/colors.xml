@@ -8,7 +8,8 @@
     <color name="Black">#000000</color><!--黑色-->
     <color name="bg_color">#3895e5</color>
     <color name="text_normal">#9E9E9E</color>
-
+    <color name="Violet">#AB7BAF</color>
+    <color name="turquoise">#2E8B57</color>
     <!--配色-->
     <color name="toolbar_text">#ffffff</color>
     <color name="divider_line">#dddddd</color>

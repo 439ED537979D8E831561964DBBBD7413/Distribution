@@ -54,6 +54,13 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<RVHolder> {
         return null == list ? 0 : list.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return getType(position);
+    }
+
+    public abstract int getType(int position);
+
     private AdapterView.OnItemClickListener onItemClickListener;
 
     public AdapterView.OnItemClickListener getOnItemClickListener() {

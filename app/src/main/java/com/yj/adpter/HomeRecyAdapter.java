@@ -14,16 +14,23 @@ import java.util.List;
  * @author LK
  */
 
-public class HomeRecyAdapter extends CommonAdapter<String>implements View.OnClickListener{
+public class HomeRecyAdapter extends CommonAdapter<String> implements View.OnClickListener {
     private OnViewClickListener listener;
+    public static final int TYPE_HEAD = 0;
+    public static final int TYPE_CONTENT = 1;
 
-    public HomeRecyAdapter(Context context, List list) {
+    public HomeRecyAdapter(Context context, List list, OnViewClickListener listener) {
         super(context, list);
+        this.listener = listener;
     }
 
     @Override
     public int onCreateViewLayoutID(int viewType) {
-        return R.layout.string;
+        if (viewType == TYPE_HEAD) {
+            return R.layout.homeheadview;
+        } else {
+            return R.layout.string;
+        }
     }
 
     @Override
@@ -35,8 +42,14 @@ public class HomeRecyAdapter extends CommonAdapter<String>implements View.OnClic
 
     }
 
-    public void setOnViewClickListener(OnViewClickListener listener) {
-        this.listener = listener;
+    @Override
+    public int getType(int position) {
+        if (position == -1) {
+            return TYPE_HEAD;
+        } else {
+            return TYPE_CONTENT;
+        }
+
     }
 
     @Override

@@ -44,9 +44,9 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
     protected void initData() {
         swipeToLoadLayout.setRefreshing(true);
         swipeTarget.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new HomeRecyAdapter(mActivity, mlist);
+        adapter = new HomeRecyAdapter(mActivity, mlist,this);
         swipeTarget.setAdapter(adapter);
-        adapter.setOnViewClickListener(this);
+
     }
 
 

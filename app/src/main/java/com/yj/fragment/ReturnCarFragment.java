@@ -24,7 +24,7 @@ import butterknife.BindView;
  *
  * @author LK
  */
-public class ReturnCarFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener {
+public class ReturnCarFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, HomeRecyAdapter.OnViewClickListener {
 
     @BindView(R.id.swipe_target)
     RecyclerView swipeTarget;
@@ -32,6 +32,7 @@ public class ReturnCarFragment extends BaseFragment implements OnRefreshListener
     SwipeToLoadLayout swipeToLoadLayout;
     List<String> mlist = new ArrayList<>();
     HomeRecyAdapter adapter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_return_car;
@@ -47,7 +48,7 @@ public class ReturnCarFragment extends BaseFragment implements OnRefreshListener
     protected void initData() {
         swipeToLoadLayout.setRefreshing(true);
         swipeTarget.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new HomeRecyAdapter(mActivity, mlist);
+        adapter = new HomeRecyAdapter(mActivity, mlist, this);
         swipeTarget.setAdapter(adapter);
     }
 
@@ -92,5 +93,10 @@ public class ReturnCarFragment extends BaseFragment implements OnRefreshListener
         if (swipeToLoadLayout.isLoadingMore()) {
             swipeToLoadLayout.setLoadingMore(false);
         }
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+
     }
 }

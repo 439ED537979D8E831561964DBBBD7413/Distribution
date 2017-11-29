@@ -7,4 +7,39 @@
     android:orientation="vertical"
     tools:context="com.yj.loging.view.LandingActivity">
 
+    <include layout="@layout/base_title_layout" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入用户名"
+        android:inputType="phone"
+        app:met_autoValidate="true"
+        app:met_clearButton="true"
+        app:met_errorColor="#ddaa00"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="用户名"
+        app:met_iconLeft="@drawable/head_imag"
+        app:met_maxCharacters="11"
+        app:met_minCharacters="11"
+        android:maxLength="11"
+        app:met_primaryColor="#982360" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入密码"
+        app:met_autoValidate="true"
+        app:met_clearButton="true"
+        app:met_errorColor="#ddaa00"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="密码"
+        app:met_iconLeft="@drawable/password_imag"
+        app:met_maxCharacters="20"
+        app:met_minCharacters="6"
+        app:met_primaryColor="#982360" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
