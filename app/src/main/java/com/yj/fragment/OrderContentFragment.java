@@ -24,7 +24,7 @@ import butterknife.BindView;
  *
  * @author LK
  */
-public class OrderContentFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener ,HomeRecyAdapter.OnViewClickListener{
+public class OrderContentFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, HomeRecyAdapter.OnViewClickListener {
 
     @BindView(R.id.swipe_target)
     RecyclerView swipeTarget;
@@ -32,6 +32,7 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
     SwipeToLoadLayout swipeToLoadLayout;
     HomeRecyAdapter adapter;
     List<String> mlist = new ArrayList<>();
+
     public static OrderContentFragment newInstance(int type) {
         return newInstance(type, false);
     }
@@ -68,7 +69,7 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
     protected void initData() {
         swipeToLoadLayout.setRefreshing(true);
         swipeTarget.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new HomeRecyAdapter(mActivity, mlist,this);
+        adapter = new HomeRecyAdapter(mActivity, mlist, this);
         swipeTarget.setAdapter(adapter);
     }
 
@@ -78,12 +79,11 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
         swipeToLoadLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //设置是否上拉加载
-                showLog("上拉加载");
+                //设置是否上拉加载+
                 for (int i = 0; i < 10; i++) {
                     mlist.add("刷新" + i);
                 }
-                swipeToLoadLayout.setLoadingMore(false);
+                swipeToLoadLayout.setRefreshing(false);
                 adapter.notifyDataSetChanged();
             }
         }, 1000);
@@ -95,12 +95,13 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
             @Override
             public void run() {
                 //设置是否上拉刷新
-                showLog("下拉刷新");
                 for (int i = 0; i < 10; i++) {
                     mlist.add("数据" + i);
                 }
                 adapter.notifyDataSetChanged();
-                swipeToLoadLayout.setRefreshing(false);
+                if (null != swipeToLoadLayout) {
+                    swipeToLoadLayout.setRefreshing(false);
+                }
             }
         }, 1000);
     }

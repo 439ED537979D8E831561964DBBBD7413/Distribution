@@ -19,10 +19,14 @@ import android.widget.Toast;
 
 import com.yj.adpter.AdapterVP;
 import com.yj.base.BaseActivity;
+import com.yj.bean.User;
+import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
 import com.yj.fragment.HomeFragment;
 import com.yj.fragment.OrderFragment;
 import com.yj.fragment.ReturnCarFragment;
+import com.yj.loging.view.LandingActivity;
+import com.yj.util.PreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,7 +35,6 @@ import butterknife.OnClick;
  * @author LK
  */
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener, NavigationView.OnNavigationItemSelectedListener {
-
 
     @BindView(R.id.title_content_layout)
     FrameLayout titleContentLayout;
@@ -52,6 +55,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     @BindView(R.id.title_right_img)
     ImageView titleRightImg;
     private long firstTime = 0;
+    private TextView username;
+    private User user;
+
 
     @Override
     protected int getLayoutId() {
@@ -72,6 +78,16 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mVp.setAdapter(adapterVP);
         mVp.addOnPageChangeListener(this);
         navigationview.setNavigationItemSelectedListener(this);
+        View headerView = navigationview.getHeaderView(0);
+        username = headerView.findViewById(R.id.user_name);
+        if (getIntent().hasExtra("user")) {
+            user = getIntent().getParcelableExtra("user");
+            username.setText(user.getUsername());
+        } else {
+            username.setText(PreferenceUtils.getPrefString(mcontext, Constant.USERNAME, ""));
+        }
+
+
     }
 
     /**
@@ -104,7 +120,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         titleContentLayout.removeAllViews();
         titleRight.setText("");
         titleRight.setVisibility(View.VISIBLE);
-        if(titleRightImg.getVisibility()==View.VISIBLE){
+        if (titleRightImg.getVisibility() == View.VISIBLE) {
             titleRightImg.setVisibility(View.GONE);
         }
         if (isSearchBox) {
@@ -179,7 +195,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_news:
-
+                break;
+            case R.id.nav_exit:
+                PreferenceUtils.remove(mcontext, Constant.UID);
+                CommonUtils.goActivity(mcontext, LandingActivity.class, null);
                 break;
             default:
                 break;

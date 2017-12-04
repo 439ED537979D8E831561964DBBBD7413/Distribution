@@ -10,7 +10,10 @@ import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.yj.adpter.HomeRecyAdapter;
 import com.yj.base.BaseFragment;
+import com.yj.bean.DataOrderNum;
+import com.yj.bean.OrderItem;
 import com.yj.distribution.R;
+import com.yj.util.ShowLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,7 @@ import butterknife.BindView;
 /**
  * @author LK
  */
-public class HomeFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener,HomeRecyAdapter.OnViewClickListener {
+public class HomeFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, HomeRecyAdapter.OnViewClickListener {
 
     @BindView(R.id.swipeToLoadLayout)
     SwipeToLoadLayout swipeToLoadLayout;
@@ -28,6 +31,9 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
     @BindView(R.id.swipe_target)
     RecyclerView swipeTarget;
     HomeRecyAdapter adapter;
+    private int mPageMark;
+    private List<DataOrderNum> orderNums = new ArrayList<>();
+    private List<OrderItem> orderItem = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -42,46 +48,34 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
 
     @Override
     protected void initData() {
-        swipeToLoadLayout.setRefreshing(true);
+        //ShowLog.e(PreferenceUtils.getPrefString(mActivity, Constant.TOKEN, ""));
         swipeTarget.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new HomeRecyAdapter(mActivity, mlist,this);
+        adapter = new HomeRecyAdapter(mActivity, mlist, this);
         swipeTarget.setAdapter(adapter);
+        //swipeToLoadLayout.setRefreshing(true);
 
     }
 
 
     @Override
     public void onLoadMore() {
-        swipeToLoadLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //设置是否上拉加载
-                showLog("上拉加载");
-                for (int i = 0; i < 10; i++) {
-                    mlist.add("刷新" + i);
-                }
-                swipeToLoadLayout.setLoadingMore(false);
-                adapter.notifyDataSetChanged();
-            }
-        }, 2000);
-
-
+        //上拉加载
+        //swipeToLoadLayout.setLoadingMore(false);
+        // mPageMark++;
+        // requestData();
     }
 
     @Override
     public void onRefresh() {
-        swipeToLoadLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //设置是否上拉刷新
-                showLog("下拉刷新");
-                for (int i = 0; i < 10; i++) {
-                    mlist.add("数据" + i);
-                }
-                adapter.notifyDataSetChanged();
-                swipeToLoadLayout.setRefreshing(false);
-            }
-        }, 1000);
+        //设置是否下拉刷新
+        //mPageMark = 1;
+//        if (null != swipeToLoadLayout) {
+//            swipeToLoadLayout.setRefreshing(false);
+//        }
+
+    }
+
+    private void requestData() {
 
     }
 
@@ -98,6 +92,8 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
 
     @Override
     public void onItemClick(View view, int position) {
-        showLog("点击的是"+position);
+        ShowLog.e("点击的是" + position);
     }
+
+
 }

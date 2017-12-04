@@ -3,23 +3,29 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_news"
-            android:title="新闻"/>
+            android:title="新闻" />
 
         <item
             android:id="@+id/nav_photos"
 
-            android:title="图片"/>
+            android:title="图片" />
 
         <item
             android:id="@+id/nav_videos"
 
-            android:title="视频"/>
+            android:title="视频" />
+
     </group>
 
     <group android:checkableBehavior="none">
 
         <item
             android:id="@+id/nav_setting"
-            android:title="设置"/>
+            android:title="设置" />
+    </group>
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_exit"
+            android:title="退出" />
     </group>
 </menu>

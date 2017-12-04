@@ -13,6 +13,7 @@ import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.yj.adpter.HomeRecyAdapter;
 import com.yj.base.BaseFragment;
 import com.yj.distribution.R;
+import com.yj.util.ShowLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,11 +59,13 @@ public class ReturnCarFragment extends BaseFragment implements OnRefreshListener
             @Override
             public void run() {
                 //设置是否上拉加载
-                showLog("上拉加载");
+                ShowLog.e("上拉加载");
                 for (int i = 0; i < 10; i++) {
                     mlist.add("刷新" + i);
                 }
-                swipeToLoadLayout.setLoadingMore(false);
+                if (null!=swipeToLoadLayout){
+                    swipeToLoadLayout.setRefreshing(false);
+                }
                 adapter.notifyDataSetChanged();
             }
         }, 1000);
@@ -74,12 +77,15 @@ public class ReturnCarFragment extends BaseFragment implements OnRefreshListener
             @Override
             public void run() {
                 //设置是否上拉刷新
-                showLog("下拉刷新");
+                ShowLog.e("下拉刷新");
                 for (int i = 0; i < 10; i++) {
                     mlist.add("数据" + i);
                 }
                 adapter.notifyDataSetChanged();
-                swipeToLoadLayout.setRefreshing(false);
+
+                if (null!=swipeToLoadLayout){
+                    swipeToLoadLayout.setRefreshing(false);
+                }
             }
         }, 1000);
     }

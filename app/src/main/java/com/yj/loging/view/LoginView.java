@@ -1,5 +1,7 @@
 package com.yj.loging.view;
 
+import android.os.Bundle;
+
 /**
  * Created by LK on 2017/11/17.
  *
@@ -18,17 +20,13 @@ public interface LoginView {
     void hideProgress();
 
     /**
-     *
+     * 设置错误信息
+     * @param msg
      */
-    void setUsernameError();
-
-    /**
-     *
-     */
-    void setPasswordError();
+    void setError(String msg);
 
     /**
      *跳转到Home界面
      */
-    void navigateToHome();
+    void navigateToHome(Bundle bundle);
 }

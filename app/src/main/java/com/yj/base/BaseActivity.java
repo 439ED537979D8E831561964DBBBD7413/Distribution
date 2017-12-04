@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
-import com.yj.util.ShowLog;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -62,7 +60,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         mToast.show();
     }
 
-    protected void showLog(String msg) {
-        ShowLog.e(msg);
-    }
 }

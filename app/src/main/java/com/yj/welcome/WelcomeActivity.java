@@ -1,39 +1,46 @@
 package com.yj.welcome;
 
-import android.content.Context;
-import android.os.Bundle;
+import android.os.Build;
 import android.os.CountDownTimer;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.yj.base.BaseActivity;
 import com.yj.common.CommonUtils;
+import com.yj.common.Constant;
 import com.yj.distribution.MainActivity;
 import com.yj.distribution.R;
+import com.yj.loging.view.LandingActivity;
+import com.yj.util.PreferenceUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * @author LK
  *         开机欢迎界面
  */
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends BaseActivity {
 
     @BindView(R.id.CountdownText)
     TextView CountdownText;
-    private Context mcontext;
+    private String uid;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
-        ButterKnife.bind(this);
-        mcontext = getApplicationContext();
+    protected int getLayoutId() {
+        return R.layout.activity_welcome;
+    }
+
+    @Override
+    protected void initData() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+        uid = PreferenceUtils.getPrefString(mcontext, Constant.UID, "");
         timer.start();
+
     }
 
     private CountDownTimer timer = new CountDownTimer(3000, 1000) {
@@ -45,6 +52,7 @@ public class WelcomeActivity extends AppCompatActivity {
         @Override
         public void onFinish() {
             goActivity();
+
         }
     };
 
@@ -54,12 +62,11 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void goActivity() {
-        CommonUtils.goActivity(mcontext, MainActivity.class, null, true);
+        if (uid.equals("")) {
+            CommonUtils.goActivity(mcontext, LandingActivity.class, null, true);
+        } else {
+            CommonUtils.goActivity(mcontext, MainActivity.class, null, true);
+        }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ButterKnife.bind(this).unbind();
-    }
 }

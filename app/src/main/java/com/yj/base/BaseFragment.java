@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.yj.util.ShowLog;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -113,6 +111,7 @@ public abstract class BaseFragment extends Fragment {
         }
 
     }
+
     protected void showToast(String msg) {
         if (mToast == null) {
             mToast = Toast.makeText(mActivity, msg, Toast.LENGTH_SHORT);
@@ -121,7 +120,5 @@ public abstract class BaseFragment extends Fragment {
         }
         mToast.show();
     }
-    protected void showLog(String msg) {
-        ShowLog.e(msg);
-    }
+
 }

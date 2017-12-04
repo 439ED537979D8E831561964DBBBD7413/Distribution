@@ -7,4 +7,8 @@
     <dimen name="height_180dp">180dp</dimen>
     <dimen name="refresh_header_height_twitter">60dp</dimen>
     <dimen name="load_more_footer_height_classic">60dp</dimen>
+    <dimen name="height_40dp">40dp</dimen>
+    <dimen name="height_20dp">20dp</dimen>
+    <dimen name="tvsize_16sp">16sp</dimen>
+    <dimen name="height_30dp">30dp</dimen>
 </resources>

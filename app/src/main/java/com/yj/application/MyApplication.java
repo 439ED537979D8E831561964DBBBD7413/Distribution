@@ -3,6 +3,7 @@ package com.yj.application;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.lzy.okgo.OkGo;
 
 /**
  * Created by LK on 2017/11/18.
@@ -15,5 +16,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(this);
+        OkGo.getInstance().init(this);
     }
 }
