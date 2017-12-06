@@ -49,8 +49,8 @@ public class ReturnCarFragment extends BaseFragment implements OnRefreshListener
     protected void initData() {
         swipeToLoadLayout.setRefreshing(true);
         swipeTarget.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new HomeRecyAdapter(mActivity, mlist, this);
-        swipeTarget.setAdapter(adapter);
+//        adapter = new HomeRecyAdapter(mActivity, mlist, this);
+//        swipeTarget.setAdapter(adapter);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ReturnCarFragment extends BaseFragment implements OnRefreshListener
                 if (null!=swipeToLoadLayout){
                     swipeToLoadLayout.setRefreshing(false);
                 }
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
             }
         }, 1000);
     }
@@ -81,7 +81,7 @@ public class ReturnCarFragment extends BaseFragment implements OnRefreshListener
                 for (int i = 0; i < 10; i++) {
                     mlist.add("数据" + i);
                 }
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
 
                 if (null!=swipeToLoadLayout){
                     swipeToLoadLayout.setRefreshing(false);

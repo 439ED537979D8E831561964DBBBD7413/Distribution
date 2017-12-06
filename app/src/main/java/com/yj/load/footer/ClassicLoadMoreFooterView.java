@@ -62,7 +62,7 @@ public class ClassicLoadMoreFooterView extends SwipeLoadMoreFooterLayout {
 
     @Override
     public void onLoadMore() {
-        tvLoadMore.setText("加载更多");
+        tvLoadMore.setText("正在拼命的加载数据！");
         progressBar.setVisibility(VISIBLE);
     }
 

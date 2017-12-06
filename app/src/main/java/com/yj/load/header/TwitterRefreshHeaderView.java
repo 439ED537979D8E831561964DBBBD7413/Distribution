@@ -65,7 +65,7 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
         ivArrow.clearAnimation();
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(VISIBLE);
-        tvRefresh.setText("加载中");
+        tvRefresh.setText("正在拼命的加载数据！");
     }
 
     @Override

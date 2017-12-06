@@ -15,14 +15,12 @@ import java.util.List;
  */
 
 public abstract class CommonAdapter<T> extends RecyclerView.Adapter<RVHolder> {
+
     protected List<T> list;
     protected Context context;
 
-
-    public CommonAdapter(Context context, List list) {
+    public CommonAdapter(Context context) {
         this.context = context;
-        this.list = list;
-
     }
 
     @Override
@@ -54,13 +52,6 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<RVHolder> {
         return null == list ? 0 : list.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return getType(position);
-    }
-
-    public abstract int getType(int position);
-
     private AdapterView.OnItemClickListener onItemClickListener;
 
     public AdapterView.OnItemClickListener getOnItemClickListener() {
@@ -69,5 +60,8 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<RVHolder> {
 
     public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+    public void setList(List<T> list) {
+        this.list = list;
     }
 }

@@ -5,10 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.Callback;
-import com.lzy.okgo.model.Progress;
+import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.model.Response;
-import com.lzy.okgo.request.base.Request;
 import com.yj.bean.User;
 import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
@@ -16,7 +14,6 @@ import com.yj.loging.OnLoginFinishedListener;
 import com.yj.other.MyThrowable;
 import com.yj.util.GsonUtil;
 import com.yj.util.PreferenceUtils;
-import com.yj.util.ShowLog;
 
 import org.json.JSONObject;
 
@@ -46,12 +43,7 @@ public class LoginModelImpl implements LoginModel {
             OkGo.<User>post(Constant.BASEURL + "Appdi/dologin")
                     .params(params)
                     .tag(this)
-                    .execute(new Callback<User>() {
-                        @Override
-                        public void onStart(Request<User, ? extends Request> request) {
-
-                        }
-
+                    .execute(new AbsCallback<User>() {
                         @Override
                         public void onSuccess(Response<User> response) {
                             User user = response.body();
@@ -64,29 +56,9 @@ public class LoginModelImpl implements LoginModel {
                         }
 
                         @Override
-                        public void onCacheSuccess(Response<User> response) {
-
-                        }
-
-                        @Override
                         public void onError(Response<User> response) {
-                            ShowLog.e(response.getException().getMessage());
+                            super.onError(response);
                             listener.onError(response.getException().getMessage());
-                        }
-
-                        @Override
-                        public void onFinish() {
-
-                        }
-
-                        @Override
-                        public void uploadProgress(Progress progress) {
-
-                        }
-
-                        @Override
-                        public void downloadProgress(Progress progress) {
-
                         }
 
                         @Override
@@ -101,7 +73,6 @@ public class LoginModelImpl implements LoginModel {
                                 User user = (User) GsonUtil.Json2Java(json, User.class);
                                 return user;
                             }
-
                         }
                     });
         } else {
@@ -113,4 +84,5 @@ public class LoginModelImpl implements LoginModel {
     public void onDestroys() {
         OkGo.getInstance().cancelTag(this);
     }
+
 }

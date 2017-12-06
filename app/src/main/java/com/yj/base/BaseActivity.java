@@ -22,7 +22,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     Unbinder unbinder;
     protected LayoutInflater inflater;
     public static Toast mToast;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -24,7 +26,6 @@ public abstract class BaseFragment extends Fragment {
     protected Activity mActivity;
     public static Toast mToast;
     Unbinder unbinder;
-
     /**
      * 是否对用户可见
      */
@@ -83,6 +84,12 @@ public abstract class BaseFragment extends Fragment {
         unbinder.unbind();
         mIsVisible = false;
         mIsPrepare = false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        OkGo.getInstance().cancelAll();
     }
 
     @Override

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="gone">
 
     <View
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="7"
+            android:layout_weight="7.5"
             android:orientation="vertical">
 
             <TextView
@@ -25,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="封签号：168135168165" />
+                android:text="封  签  号 ：168135168165" />
 
             <TextView
                 android:id="@+id/Delivery_address"
@@ -41,25 +42,28 @@
                 android:padding="5dp"
                 android:text="联系电话：15573462029" />
 
-            <LinearLayout
+
+            <TextView
+                android:id="@+id/customer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp">
+                android:padding="5dp"
+                android:text="客户名称：" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="级别：" />
+            <TextView
+                android:id="@+id/moneys"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="金额：2369元-本次退货369元=2000元"
+                android:textColor="@color/snackbar_bg" />
 
-                <RatingBar
-                    style="@android:style/Widget.Holo.RatingBar.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:isIndicator="true"
-                    android:numStars="5" />
-            </LinearLayout>
-
+            <TextView
+                android:id="@+id/remarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="客户备注：" />
 
             <TextView
                 android:id="@+id/Distribution_Success"
@@ -68,13 +72,12 @@
                 android:padding="5dp"
                 android:text="配送成功" />
 
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2.5"
             android:orientation="vertical">
 
             <TextView
@@ -86,35 +89,42 @@
                 android:textColor="@color/turquoise" />
 
             <TextView
+                android:id="@+id/myNavigation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bgshape"
                 android:drawableLeft="@drawable/navigation"
-                android:text="导航" />
-
-            <TextView
-                android:id="@+id/Navigation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@drawable/bgshape"
-                android:drawableLeft="@drawable/phone"
-                android:drawablePadding="5dp"
-                android:text="拨打" />
-
+                android:drawablePadding="2dp"
+                android:padding="4dp"
+                android:text="导  航" />
 
             <TextView
                 android:id="@+id/dial_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bgshape"
+                android:drawableLeft="@drawable/phone"
+                android:drawablePadding="5dp"
+                android:padding="4dp"
+                android:text="拨  打" />
+
+
+            <TextView
+                android:id="@+id/return_shop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:padding="5dp"
                 android:text="商品退回" />
+
 
             <TextView
                 android:id="@+id/sure_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bgshape_org"
                 android:padding="5dp"
                 android:text="确定订单" />
@@ -122,19 +132,5 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/money"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="金额：2369元-本次退货369元=2000元"
-        android:textColor="@color/snackbar_bg" />
-
-    <TextView
-        android:id="@+id/remarks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="客户备注：" />
 
 </LinearLayout>

@@ -60,5 +60,4 @@ public class ViewHolder {
         return get(id);
     }
 
-
 }

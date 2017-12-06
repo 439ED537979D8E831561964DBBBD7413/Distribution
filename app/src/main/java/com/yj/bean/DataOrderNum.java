@@ -43,6 +43,7 @@ public class DataOrderNum {
     }
 
     public static class YearBean {
+
         /**
          * money : 3254835.03
          * num : 5924
@@ -51,8 +52,8 @@ public class DataOrderNum {
         private String money;
         private String num;
 
-        public String getMoney() {
-            return money;
+        public int getMoney() {
+            return Double.valueOf(money).intValue();
         }
 
         public void setMoney(String money) {
@@ -77,8 +78,8 @@ public class DataOrderNum {
         private String money;
         private String num;
 
-        public String getMoney() {
-            return money;
+        public int getMoney() {
+            return Double.valueOf(money).intValue();
         }
 
         public void setMoney(String money) {
@@ -95,6 +96,7 @@ public class DataOrderNum {
     }
 
     public static class DayBean {
+
         /**
          * money : 4893.10
          * num : 8
@@ -103,8 +105,8 @@ public class DataOrderNum {
         private String money;
         private String num;
 
-        public String getMoney() {
-            return money;
+        public int getMoney() {
+            return Double.valueOf(money).intValue();
         }
 
         public void setMoney(String money) {
@@ -119,4 +121,6 @@ public class DataOrderNum {
             this.num = num;
         }
     }
+
+
 }
