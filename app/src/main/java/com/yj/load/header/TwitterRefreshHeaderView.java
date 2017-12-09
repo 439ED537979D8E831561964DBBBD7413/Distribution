@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.aspsine.swipetoloadlayout.SwipeRefreshHeaderLayout;
 import com.yj.distribution.R;
+import com.yj.util.DateUtil;
+import com.yj.util.ShowLog;
 
 
 /**
@@ -24,6 +26,8 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
 
     private TextView tvRefresh;
 
+    private TextView tvRefreshTime;
+
     private ProgressBar progressBar;
 
     private int mHeaderHeight;
@@ -33,6 +37,8 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
     private Animation rotateDown;
 
     private boolean rotated = false;
+
+    String time = "";
 
     public TwitterRefreshHeaderView(Context context) {
         this(context, null);
@@ -53,10 +59,11 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        tvRefresh = (TextView) findViewById(R.id.tvRefresh);
-        ivArrow = (ImageView) findViewById(R.id.ivArrow);
-        ivSuccess = (ImageView) findViewById(R.id.ivSuccess);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        tvRefresh = findViewById(R.id.tvRefresh);
+        ivArrow = findViewById(R.id.ivArrow);
+        ivSuccess = findViewById(R.id.ivSuccess);
+        progressBar = findViewById(R.id.progressbar);
+        tvRefreshTime = findViewById(R.id.Refresh_time);
     }
 
     @Override
@@ -65,7 +72,7 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
         ivArrow.clearAnimation();
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(VISIBLE);
-        tvRefresh.setText("正在拼命的加载数据！");
+        tvRefresh.setText("正在拼命的加载中");
     }
 
     @Override
@@ -92,7 +99,11 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
                     ivArrow.startAnimation(rotateDown);
                     rotated = false;
                 }
-
+                if ("".equals(time)) {
+                    tvRefreshTime.setText("");
+                } else {
+                    tvRefreshTime.setText(String.format("上次更新于：%s",time));
+                }
                 tvRefresh.setText("下拉刷新");
             }
         }
@@ -111,6 +122,8 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(GONE);
         tvRefresh.setText("完成");
+        time = DateUtil.getDateFormat("yyyy-MM-dd HH:mm");
+        tvRefreshTime.setText(String.format("更新于%s", time));
     }
 
     @Override

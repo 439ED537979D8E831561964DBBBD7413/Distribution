@@ -1,5 +1,6 @@
 package com.yj.base;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.lzy.okgo.OkGo;
@@ -94,14 +96,16 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             mIsVisible = true;
             onLazyLoad();
         } else {
             mIsVisible = false;
         }
+        super.setUserVisibleHint(isVisibleToUser);
+
     }
+
 
     /**
      * 懒加载，仅当用户可见切view初始化结束后才会执行
@@ -119,6 +123,7 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
+    @SuppressLint("ShowToast")
     protected void showToast(String msg) {
         if (mToast == null) {
             mToast = Toast.makeText(mActivity, msg, Toast.LENGTH_SHORT);
@@ -128,4 +133,12 @@ public abstract class BaseFragment extends Fragment {
         mToast.show();
     }
 
+    protected void hintKbTwo() {
+        InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && mActivity.getCurrentFocus() != null) {
+            if (mActivity.getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(mActivity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
 }

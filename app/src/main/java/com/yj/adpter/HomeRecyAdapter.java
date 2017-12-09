@@ -23,7 +23,7 @@ public class HomeRecyAdapter extends CommonAdapter<OrderItem> implements View.On
     private OnViewClickListener listener;
     private static final int TYPE_HEAD = 0;
     private static final int TYPE_CONTENT = 1;
-    private List<DataOrderNum> headList = new ArrayList<>();
+    private DataOrderNum headList;
     private List<String> time = new ArrayList<>();
     private int currentItems = -1;
 
@@ -57,9 +57,9 @@ public class HomeRecyAdapter extends CommonAdapter<OrderItem> implements View.On
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (position == 0 && headList.size() > 0) {
-            if (headList.get(0) != null) {
-                DataOrderNum dataOrderNum = headList.get(0);
+        if (position == 0 ) {
+            if (headList!= null) {
+                DataOrderNum dataOrderNum = headList;
                 holder.getTextView(R.id.tv_year).setText(time.get(0) + " 年");
                 holder.getTextView(R.id.tv_month).setText(time.get(1) + " 月");
                 holder.getTextView(R.id.tv_day).setText(time.get(2) + " 日");
@@ -142,7 +142,7 @@ public class HomeRecyAdapter extends CommonAdapter<OrderItem> implements View.On
         void onItemClick(View view, int position);
     }
 
-    public void setHeadlist(List<DataOrderNum> headlist) {
+    public void setHeadlist(DataOrderNum headlist) {
         this.headList = headlist;
     }
 

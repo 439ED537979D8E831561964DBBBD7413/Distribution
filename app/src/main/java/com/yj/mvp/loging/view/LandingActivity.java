@@ -1,4 +1,4 @@
-package com.yj.loging.view;
+package com.yj.mvp.loging.view;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,12 +6,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.yj.base.BaseActivity;
+import com.yj.bean.User;
 import com.yj.common.CommonUtils;
 import com.yj.distribution.MainActivity;
 import com.yj.distribution.R;
-import com.yj.loging.presenter.LoginPresenter;
-import com.yj.loging.presenter.LoginPresenterImpl;
+import com.yj.mvp.mvpbase.MVPBaseActivity;
+import com.yj.mvp.loging.contract.LoginContract;
+import com.yj.mvp.loging.presenter.LoginPresenterImpl;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -19,7 +20,7 @@ import butterknife.OnClick;
 /**
  * @author LK
  */
-public class LandingActivity extends BaseActivity implements LoginView {
+public class LandingActivity extends MVPBaseActivity<LoginContract.View<User>, LoginPresenterImpl> implements LoginContract.View<User> {
 
     @BindView(R.id.tv_title_content)
     TextView tvTitleContent;
@@ -29,7 +30,6 @@ public class LandingActivity extends BaseActivity implements LoginView {
     MaterialEditText editPassword;
     @BindView(R.id.login_pgb)
     ProgressBar loginPgb;
-    private LoginPresenter presenter;
 
     @Override
     protected int getLayoutId() {
@@ -39,7 +39,6 @@ public class LandingActivity extends BaseActivity implements LoginView {
     @Override
     protected void initData() {
         tvTitleContent.setText("登   陆");
-        presenter = new LoginPresenterImpl(this, mcontext);
     }
 
     @Override
@@ -57,12 +56,12 @@ public class LandingActivity extends BaseActivity implements LoginView {
         showToast(msg);
     }
 
-
     @Override
-    public void navigateToHome(Bundle bundle) {
+    public void navigateToHome(User user) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("user", user);
         CommonUtils.goActivity(mcontext, MainActivity.class, bundle, true);
     }
-
 
     @OnClick({R.id.tv_register, R.id.get_back_psw, R.id.login_btn})
     public void onViewClicked(View view) {
@@ -72,7 +71,8 @@ public class LandingActivity extends BaseActivity implements LoginView {
             case R.id.get_back_psw:
                 break;
             case R.id.login_btn:
-                presenter.validateCredentials(editUsername.getText().toString().trim(), editPassword.getText().toString().trim());
+                mPresenter.validateCredentials(editUsername.getText().toString().trim(), editPassword.getText().toString().trim());
+                hintKbTwo();
                 break;
             default:
                 break;
@@ -80,8 +80,13 @@ public class LandingActivity extends BaseActivity implements LoginView {
     }
 
     @Override
-    protected void onDestroy() {
-        presenter.onDestroy();
+    protected LoginPresenterImpl createPresenter() {
+        return new LoginPresenterImpl(this, mcontext);
+    }
+
+    @Override
+    public void onDestroy() {
+        mPresenter.onDestroy();
         super.onDestroy();
     }
 }

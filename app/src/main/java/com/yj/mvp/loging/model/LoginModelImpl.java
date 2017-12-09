@@ -1,8 +1,7 @@
-package com.yj.loging.model;
+package com.yj.mvp.loging.model;
 
 
 import android.content.Context;
-import android.os.Bundle;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.AbsCallback;
@@ -10,9 +9,8 @@ import com.lzy.okgo.model.Response;
 import com.yj.bean.User;
 import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
-import com.yj.loging.OnLoginFinishedListener;
+import com.yj.mvp.loging.contract.LoginContract;
 import com.yj.other.MyThrowable;
-import com.yj.util.GsonUtil;
 import com.yj.util.PreferenceUtils;
 
 import org.json.JSONObject;
@@ -23,11 +21,20 @@ import java.util.Map;
 /**
  * @author LK
  */
-public class LoginModelImpl implements LoginModel {
+public class LoginModelImpl implements LoginContract.Model {
+    private LoginContract.OnLoginFinishedListener<User> listener;
+
+    public LoginModelImpl(LoginContract.OnLoginFinishedListener<User> listener) {
+        this.listener = listener;
+    }
 
     @Override
-    public void login(String username, String password, final OnLoginFinishedListener listener, final Context context) {
+    public void onDestroys() {
+        OkGo.getInstance().cancelTag(this);
+    }
 
+    @Override
+    public void login(String username, String password, final Context context) {
         if (username.equals("")) {
             listener.onError("账号未填写");
             return;
@@ -50,9 +57,7 @@ public class LoginModelImpl implements LoginModel {
                             PreferenceUtils.setPrefString(context, Constant.UID, user.getUid());
                             PreferenceUtils.setPrefString(context, Constant.TOKEN, user.getToken());
                             PreferenceUtils.setPrefString(context, Constant.USERNAME, user.getUsername());
-                            Bundle bundle = new Bundle();
-                            bundle.putParcelable("user", user);
-                            listener.onSuccess(bundle);
+                            listener.onSuccess(user);
                         }
 
                         @Override
@@ -70,8 +75,7 @@ public class LoginModelImpl implements LoginModel {
                                 throw new MyThrowable(object.optString("info"));
                             } else {
                                 //转换对象
-                                User user = (User) GsonUtil.Json2Java(json, User.class);
-                                return user;
+                                return com.alibaba.fastjson.JSONObject.parseObject(json, User.class);
                             }
                         }
                     });
@@ -79,10 +83,4 @@ public class LoginModelImpl implements LoginModel {
             listener.onError("网络异常");
         }
     }
-
-    @Override
-    public void onDestroys() {
-        OkGo.getInstance().cancelTag(this);
-    }
-
 }

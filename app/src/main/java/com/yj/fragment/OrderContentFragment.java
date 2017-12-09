@@ -3,16 +3,22 @@ package com.yj.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.AbsCallback;
+import com.lzy.okgo.model.Response;
 import com.yj.adpter.HomeRecyAdapter;
 import com.yj.base.BaseFragment;
+import com.yj.bean.OrderItem;
+import com.yj.common.CommonUtils;
+import com.yj.common.Constant;
 import com.yj.distribution.R;
+import com.yj.util.ShowLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +36,9 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
     RecyclerView swipeTarget;
     @BindView(R.id.swipeToLoadLayout)
     SwipeToLoadLayout swipeToLoadLayout;
-    HomeRecyAdapter adapter;
-    List<String> mlist = new ArrayList<>();
+    private HomeRecyAdapter adapter;
+    private int mPageMark;
+    private List<OrderItem> orderItem = new ArrayList<>();
 
     public static OrderContentFragment newInstance(int type) {
         return newInstance(type, false);
@@ -50,10 +57,6 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
         return getArguments().getInt("type");
     }
 
-    public boolean isFirstShown() {
-        return getArguments().getBoolean("isFirstShow");
-    }
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_ordel_content;
@@ -68,47 +71,73 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
     @Override
     protected void initData() {
         swipeToLoadLayout.setRefreshing(true);
-        swipeTarget.setLayoutManager(new LinearLayoutManager(mActivity));
-//        adapter = new HomeRecyAdapter(mActivity, mlist, this);
-//        swipeTarget.setAdapter(adapter);
     }
 
-
+    /**
+     * 上啦加载
+     */
     @Override
     public void onLoadMore() {
-        swipeToLoadLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //设置是否上拉加载+
-                for (int i = 0; i < 10; i++) {
-                    mlist.add("刷新" + i);
-                }
-                swipeToLoadLayout.setRefreshing(false);
-                //adapter.notifyDataSetChanged();
-            }
-        }, 1000);
+        mPageMark++;
+        requestData();
     }
 
+    /**
+     * 下拉刷新
+     */
     @Override
     public void onRefresh() {
-        swipeToLoadLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //设置是否上拉刷新
-                for (int i = 0; i < 10; i++) {
-                    mlist.add("数据" + i);
-                }
-                //adapter.notifyDataSetChanged();
-                if (null != swipeToLoadLayout) {
-                    swipeToLoadLayout.setRefreshing(false);
-                }
-            }
-        }, 1000);
+        orderItem.clear();
+        mPageMark = 1;
+        requestData();
+    }
+
+    /**
+     * 数据加载
+     */
+    private void requestData() {
+        if (CommonUtils.isNetworkConnected(mActivity)) {
+            OkGo.<OrderItem>post(Constant.BASEURL + "Appd/order")
+                    .tag(this)
+                    .params("p", mPageMark)
+                    .params("status", getType())
+                    .execute(new AbsCallback<OrderItem>() {
+                        @Override
+                        public void onSuccess(Response<OrderItem> response) {
+
+                        }
+
+                        @Override
+                        public void onError(Response<OrderItem> response) {
+                            super.onError(response);
+                        }
+
+                        @Override
+                        public OrderItem convertResponse(okhttp3.Response response) throws Throwable {
+                            ShowLog.e(response.body().string());
+                            return null;
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            super.onFinish();
+                            onPauseSwipeLayout();
+                        }
+                    });
+
+        } else {
+            showToast("无网络");
+            onPauseSwipeLayout();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        onPauseSwipeLayout();
+    }
+
+    public void onPauseSwipeLayout() {
         if (swipeToLoadLayout.isRefreshing()) {
             swipeToLoadLayout.setRefreshing(false);
         }

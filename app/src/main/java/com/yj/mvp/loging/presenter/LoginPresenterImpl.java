@@ -1,12 +1,11 @@
-package com.yj.loging.presenter;
+package com.yj.mvp.loging.presenter;
 
 import android.content.Context;
-import android.os.Bundle;
 
-import com.yj.loging.OnLoginFinishedListener;
-import com.yj.loging.model.LoginModel;
-import com.yj.loging.model.LoginModelImpl;
-import com.yj.loging.view.LoginView;
+import com.yj.bean.User;
+import com.yj.mvp.mvpbase.BasePresenter;
+import com.yj.mvp.loging.contract.LoginContract;
+import com.yj.mvp.loging.model.LoginModelImpl;
 
 /**
  * Created by Anthony on 2016/2/15.
@@ -19,14 +18,15 @@ import com.yj.loging.view.LoginView;
  *
  * @author LK
  */
-public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishedListener {
-    private LoginView loginView;
-    private LoginModel loginModel;
+public class LoginPresenterImpl extends BasePresenter<LoginContract.View<User>>implements LoginContract.Presenter, LoginContract.OnLoginFinishedListener<User> {
+    private LoginContract.View<User> loginView;
+    private LoginModelImpl loginModel;
     private Context mContext;
-    public LoginPresenterImpl(LoginView loginView, Context context) {
+
+    public LoginPresenterImpl(LoginContract.View<User> loginView, Context context) {
         this.loginView = loginView;
-        this.loginModel = new LoginModelImpl();
-        this.mContext=context;
+        this.loginModel = new LoginModelImpl(this);
+        this.mContext = context;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishedListen
         if (loginView != null) {
             loginView.showProgress();
         }
-        loginModel.login(username, password, this,mContext);
+        loginModel.login(username, password, mContext);
     }
 
     @Override
@@ -52,9 +52,15 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishedListen
     }
 
     @Override
-    public void onSuccess(Bundle bundle) {
+    public void onSuccess(User user) {
         if (loginView != null) {
-            loginView.navigateToHome(bundle);
+            loginView.navigateToHome(user);
         }
+    }
+
+
+    @Override
+    public void start() {
+
     }
 }

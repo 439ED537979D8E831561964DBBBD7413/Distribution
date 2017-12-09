@@ -25,6 +25,10 @@ public class DDecoration extends RecyclerView.ItemDecoration {
         a.recycle();
     }
 
+    public DDecoration(Context context, Drawable drawable) {
+        this.mDivider = drawable;
+    }
+
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
 

@@ -22,10 +22,10 @@ import com.yj.base.BaseActivity;
 import com.yj.bean.User;
 import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
-import com.yj.fragment.HomeFragment;
 import com.yj.fragment.OrderFragment;
 import com.yj.fragment.ReturnCarFragment;
-import com.yj.loging.view.LandingActivity;
+import com.yj.mvp.home.view.HomeFragment;
+import com.yj.mvp.loging.view.LandingActivity;
 import com.yj.util.PreferenceUtils;
 
 import butterknife.BindView;

@@ -4,9 +4,9 @@
     android:id="@+id/swipeToLoadLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Black"
+    android:background="@color/text_normal"
     app:swipe_style="classic"
-    tools:context="com.yj.fragment.HomeFragment">
+    tools:context="com.yj.mvp.mvpbase.MVPBaseActivity">
 
     <include
         android:id="@id/swipe_refresh_header"
@@ -16,6 +16,7 @@
         android:id="@id/swipe_target"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/Black"
         android:overScrollMode="never" />
 
     <include

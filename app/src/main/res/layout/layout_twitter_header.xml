@@ -15,7 +15,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="48dp"
             android:layout_toLeftOf="@+id/tvRefresh"
-            android:background="@mipmap/twitter_pull_arrow" />
+            android:background="@mipmap/downarrow" />
 
         <ImageView
             android:id="@+id/ivSuccess"
@@ -42,5 +42,15 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:textColor="?attr/colorPrimary" />
+
+        <TextView
+            android:id="@+id/Refresh_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/Black" />
     </RelativeLayout>
+
+
 </com.yj.load.header.TwitterRefreshHeaderView>

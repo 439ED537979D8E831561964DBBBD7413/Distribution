@@ -11,7 +11,7 @@ import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
 import com.yj.distribution.MainActivity;
 import com.yj.distribution.R;
-import com.yj.loging.view.LandingActivity;
+import com.yj.mvp.loging.view.LandingActivity;
 import com.yj.util.PreferenceUtils;
 
 import butterknife.BindView;

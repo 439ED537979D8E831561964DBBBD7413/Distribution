@@ -1,6 +1,7 @@
 package com.yj.bean;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -37,6 +38,7 @@ public class OrderItem {
     private String status;
     private String money;
     @SerializedName("class")
+    @JSONField(name = "class")
     private String classX;
     private String num;
     private String shopname;
