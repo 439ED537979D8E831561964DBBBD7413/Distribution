@@ -3,6 +3,7 @@ package com.yj.mvp.loging.model;
 
 import android.content.Context;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.model.Response;
@@ -12,8 +13,6 @@ import com.yj.common.Constant;
 import com.yj.mvp.loging.contract.LoginContract;
 import com.yj.other.MyThrowable;
 import com.yj.util.PreferenceUtils;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,13 +68,13 @@ public class LoginModelImpl implements LoginContract.Model {
                         @Override
                         public User convertResponse(okhttp3.Response response) throws Throwable {
                             String json = response.body().string();
-                            final JSONObject object = new JSONObject(json);
-                            String code = object.optString("errcode");
+                            final JSONObject object = JSONObject.parseObject(json);
+                            String code = object.getString("errcode");
                             if (code.equals("01")) {
-                                throw new MyThrowable(object.optString("info"));
+                                throw new MyThrowable(object.getString("info"));
                             } else {
                                 //转换对象
-                                return com.alibaba.fastjson.JSONObject.parseObject(json, User.class);
+                                return JSONObject.parseObject(json, User.class);
                             }
                         }
                     });

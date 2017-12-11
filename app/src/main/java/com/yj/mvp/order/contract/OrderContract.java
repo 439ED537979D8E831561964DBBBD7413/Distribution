@@ -26,6 +26,9 @@ public class OrderContract {
     }
 
     public interface Presenter {
+        //设置类型
+        void setType(int type);
+
         //下拉刷新请求
         void requestRefresh();
 

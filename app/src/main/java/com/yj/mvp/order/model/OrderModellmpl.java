@@ -33,8 +33,9 @@ public class OrderModellmpl implements OrderContract.Model {
 
     @Override
     public void requestData(int page) {
+        ShowLog.e(mType + "");
         if (CommonUtils.isNetworkConnected(mContext)) {
-            OkGo.<List<OrderItem>>post(Constant.BASEURL + "")
+            OkGo.<List<OrderItem>>post(Constant.BASEURL + "Appd/order")
                     .tag(this)
                     .params("p", page)
                     .params("status", mType)

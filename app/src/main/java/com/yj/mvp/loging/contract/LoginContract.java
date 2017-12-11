@@ -11,6 +11,7 @@ import android.content.Context;
 public class LoginContract {
     public interface Model {
         void login(String username, String password, Context context);
+
         void onDestroys();
     }
 
@@ -40,6 +41,7 @@ public class LoginContract {
 
     public interface Presenter {
         void validateCredentials(String username, String password);
+
         void onDestroy();
     }
 

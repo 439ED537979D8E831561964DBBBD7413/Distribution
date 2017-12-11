@@ -10,6 +10,7 @@ import com.yj.adpter.AdapterVP;
 import com.yj.base.BaseFragment;
 import com.yj.common.Constant;
 import com.yj.distribution.R;
+import com.yj.mvp.order.view.OrderContentFragment;
 import com.yj.other.ParentViewPager;
 
 import butterknife.BindView;

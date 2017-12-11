@@ -1,24 +1,22 @@
-package com.yj.fragment;
+package com.yj.mvp.order.view;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.AbsCallback;
-import com.lzy.okgo.model.Response;
-import com.yj.adpter.HomeRecyAdapter;
-import com.yj.base.BaseFragment;
+import com.yj.adpter.OrderRecyAdapter;
 import com.yj.bean.OrderItem;
-import com.yj.common.CommonUtils;
-import com.yj.common.Constant;
 import com.yj.distribution.R;
-import com.yj.util.ShowLog;
+import com.yj.mvp.mvpbase.MVPBaseFragment;
+import com.yj.mvp.order.contract.OrderContract;
+import com.yj.mvp.order.presenter.OrderPresenterlmpl;
+import com.yj.other.DDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +28,13 @@ import butterknife.BindView;
  *
  * @author LK
  */
-public class OrderContentFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, HomeRecyAdapter.OnViewClickListener {
+public class OrderContentFragment extends MVPBaseFragment<OrderContract.View<OrderItem>, OrderPresenterlmpl> implements OrderContract.View<OrderItem>, OnRefreshListener, OnLoadMoreListener, OrderRecyAdapter.OnViewClickListener {
 
     @BindView(R.id.swipe_target)
     RecyclerView swipeTarget;
     @BindView(R.id.swipeToLoadLayout)
     SwipeToLoadLayout swipeToLoadLayout;
-    private HomeRecyAdapter adapter;
-    private int mPageMark;
+    private OrderRecyAdapter adapter;
     private List<OrderItem> orderItem = new ArrayList<>();
 
     public static OrderContentFragment newInstance(int type) {
@@ -70,7 +67,13 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     protected void initData() {
+        mPresenter.setType(getType());
+        adapter = new OrderRecyAdapter(mActivity, this);
+        swipeTarget.setLayoutManager(new LinearLayoutManager(mActivity));
+        swipeTarget.setAdapter(adapter);
+        swipeTarget.addItemDecoration(new DDecoration(mActivity, getResources().getDrawable(R.drawable.decoration)));
         swipeToLoadLayout.setRefreshing(true);
+
     }
 
     /**
@@ -78,8 +81,7 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
      */
     @Override
     public void onLoadMore() {
-        mPageMark++;
-        requestData();
+        mPresenter.requestLoadMore();
     }
 
     /**
@@ -87,49 +89,10 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
      */
     @Override
     public void onRefresh() {
+        mPresenter.requestRefresh();
         orderItem.clear();
-        mPageMark = 1;
-        requestData();
     }
 
-    /**
-     * 数据加载
-     */
-    private void requestData() {
-        if (CommonUtils.isNetworkConnected(mActivity)) {
-            OkGo.<OrderItem>post(Constant.BASEURL + "Appd/order")
-                    .tag(this)
-                    .params("p", mPageMark)
-                    .params("status", getType())
-                    .execute(new AbsCallback<OrderItem>() {
-                        @Override
-                        public void onSuccess(Response<OrderItem> response) {
-
-                        }
-
-                        @Override
-                        public void onError(Response<OrderItem> response) {
-                            super.onError(response);
-                        }
-
-                        @Override
-                        public OrderItem convertResponse(okhttp3.Response response) throws Throwable {
-                            ShowLog.e(response.body().string());
-                            return null;
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            super.onFinish();
-                            onPauseSwipeLayout();
-                        }
-                    });
-
-        } else {
-            showToast("无网络");
-            onPauseSwipeLayout();
-        }
-    }
 
     @Override
     public void onPause() {
@@ -149,5 +112,32 @@ public class OrderContentFragment extends BaseFragment implements OnRefreshListe
     @Override
     public void onItemClick(View view, int position) {
 
+    }
+
+    @Override
+    public void setError(String errmsg) {
+        showToast(errmsg);
+        onPauseSwipeLayout();
+    }
+
+    @Override
+    public void refreshContentView(List<OrderItem> contentList) {
+        adapter.setList(contentList);
+        onPauseSwipeLayout();
+    }
+
+    @Override
+    public void setCurrentItem(int position) {
+        adapter.setCurrentItem(position);
+    }
+
+    @Override
+    public void setRefreshing() {
+
+    }
+
+    @Override
+    protected OrderPresenterlmpl createPresenter() {
+        return new OrderPresenterlmpl(this, mActivity);
     }
 }
