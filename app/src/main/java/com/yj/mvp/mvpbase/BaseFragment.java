@@ -1,4 +1,4 @@
-package com.yj.base;
+package com.yj.mvp.mvpbase;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

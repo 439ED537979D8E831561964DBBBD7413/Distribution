@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.yj.mvp.loging.view.LandingActivity">
+    tools:context="com.yj.mvp.loging.LandingActivity">
 
     <include layout="@layout/base_title_layout" />
 

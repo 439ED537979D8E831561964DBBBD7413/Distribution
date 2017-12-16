@@ -24,7 +24,7 @@
             android:name=".MainActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name="com.yj.mvp.loging.view.LandingActivity"
+            android:name="com.yj.mvp.loging.LandingActivity"
             android:launchMode="singleTask" />
     </application>
 

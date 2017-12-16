@@ -1,4 +1,4 @@
-package com.yj.mvp.loging.contract;
+package com.yj.mvp.loging;
 
 import android.content.Context;
 

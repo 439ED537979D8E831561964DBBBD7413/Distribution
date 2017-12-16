@@ -1,12 +1,12 @@
-package com.yj.mvp.order.presenter;
+package com.yj.mvp.order;
 
 import android.content.Context;
 import android.view.View;
 
 import com.yj.bean.OrderItem;
 import com.yj.mvp.mvpbase.BasePresenter;
-import com.yj.mvp.order.contract.OrderContract;
-import com.yj.mvp.order.model.OrderModellmpl;
+import com.yj.mvp.order.OrderContract;
+import com.yj.mvp.order.OrderModellmpl;
 
 import java.util.List;
 

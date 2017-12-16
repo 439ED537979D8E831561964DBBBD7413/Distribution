@@ -1,11 +1,11 @@
-package com.yj.mvp.loging.presenter;
+package com.yj.mvp.loging;
 
 import android.content.Context;
 
 import com.yj.bean.User;
 import com.yj.mvp.mvpbase.BasePresenter;
-import com.yj.mvp.loging.contract.LoginContract;
-import com.yj.mvp.loging.model.LoginModelImpl;
+import com.yj.mvp.loging.LoginContract;
+import com.yj.mvp.loging.LoginModelImpl;
 
 /**
  * Created by Anthony on 2016/2/15.

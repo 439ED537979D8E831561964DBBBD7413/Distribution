@@ -1,4 +1,4 @@
-package com.yj.mvp.loging.model;
+package com.yj.mvp.loging;
 
 
 import android.content.Context;
@@ -10,7 +10,7 @@ import com.lzy.okgo.model.Response;
 import com.yj.bean.User;
 import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
-import com.yj.mvp.loging.contract.LoginContract;
+import com.yj.mvp.loging.LoginContract;
 import com.yj.other.MyThrowable;
 import com.yj.util.PreferenceUtils;
 

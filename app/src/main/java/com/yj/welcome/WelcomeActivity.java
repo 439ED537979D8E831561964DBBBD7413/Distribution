@@ -6,12 +6,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.yj.base.BaseActivity;
+import com.yj.mvp.mvpbase.BaseActivity;
 import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
 import com.yj.distribution.MainActivity;
 import com.yj.distribution.R;
-import com.yj.mvp.loging.view.LandingActivity;
+import com.yj.mvp.loging.LandingActivity;
 import com.yj.util.PreferenceUtils;
 
 import butterknife.BindView;

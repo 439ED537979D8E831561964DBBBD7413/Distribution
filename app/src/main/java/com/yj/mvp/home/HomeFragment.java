@@ -1,4 +1,4 @@
-package com.yj.mvp.home.view;
+package com.yj.mvp.home;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,8 +13,8 @@ import com.yj.bean.DataOrderNum;
 import com.yj.bean.OrderItem;
 import com.yj.distribution.R;
 import com.yj.mvp.mvpbase.MVPBaseFragment;
-import com.yj.mvp.home.contract.HomeContract;
-import com.yj.mvp.home.presenter.HomePresenterlmpl;
+import com.yj.mvp.home.HomeContract;
+import com.yj.mvp.home.HomePresenterlmpl;
 import com.yj.other.DDecoration;
 
 import java.util.ArrayList;

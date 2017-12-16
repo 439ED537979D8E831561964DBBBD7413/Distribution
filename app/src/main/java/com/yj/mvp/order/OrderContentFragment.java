@@ -1,4 +1,4 @@
-package com.yj.mvp.order.view;
+package com.yj.mvp.order;
 
 
 import android.os.Bundle;
@@ -14,8 +14,6 @@ import com.yj.adpter.OrderRecyAdapter;
 import com.yj.bean.OrderItem;
 import com.yj.distribution.R;
 import com.yj.mvp.mvpbase.MVPBaseFragment;
-import com.yj.mvp.order.contract.OrderContract;
-import com.yj.mvp.order.presenter.OrderPresenterlmpl;
 import com.yj.other.DDecoration;
 
 import java.util.ArrayList;
@@ -38,14 +36,9 @@ public class OrderContentFragment extends MVPBaseFragment<OrderContract.View<Ord
     private List<OrderItem> orderItem = new ArrayList<>();
 
     public static OrderContentFragment newInstance(int type) {
-        return newInstance(type, false);
-    }
-
-    public static OrderContentFragment newInstance(int type, boolean isFirstShow) {
         Bundle args = new Bundle();
         OrderContentFragment fragment = new OrderContentFragment();
         args.putInt("type", type);
-        args.putBoolean("FirstShow", isFirstShow);
         fragment.setArguments(args);
         return fragment;
     }

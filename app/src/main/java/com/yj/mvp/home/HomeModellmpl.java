@@ -1,4 +1,4 @@
-package com.yj.mvp.home.model;
+package com.yj.mvp.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,7 +12,7 @@ import com.yj.bean.DataOrderNum;
 import com.yj.bean.OrderItem;
 import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
-import com.yj.mvp.home.contract.HomeContract;
+import com.yj.mvp.home.HomeContract;
 import com.yj.other.MyThrowable;
 import com.yj.util.ShowLog;
 

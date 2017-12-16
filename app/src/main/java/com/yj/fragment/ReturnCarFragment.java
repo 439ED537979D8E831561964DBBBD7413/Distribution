@@ -11,7 +11,7 @@ import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.yj.adpter.HomeRecyAdapter;
-import com.yj.base.BaseFragment;
+import com.yj.mvp.mvpbase.BaseFragment;
 import com.yj.distribution.R;
 import com.yj.util.ShowLog;
 

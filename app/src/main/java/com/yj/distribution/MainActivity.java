@@ -3,7 +3,6 @@ package com.yj.distribution;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
@@ -18,14 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yj.adpter.AdapterVP;
-import com.yj.base.BaseActivity;
+import com.yj.application.AppManager;
+import com.yj.mvp.mvpbase.BaseActivity;
 import com.yj.bean.User;
 import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
-import com.yj.fragment.OrderFragment;
-import com.yj.fragment.ReturnCarFragment;
-import com.yj.mvp.home.view.HomeFragment;
-import com.yj.mvp.loging.view.LandingActivity;
+import com.yj.mvp.loging.LandingActivity;
 import com.yj.util.PreferenceUtils;
 
 import butterknife.BindView;
@@ -73,8 +70,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         titleContentLayout.addView(rootView2);
         titleView.setText("配货统计");
         homeRG.setOnCheckedChangeListener(this);
-        Fragment[] fragments = {new HomeFragment(), new OrderFragment(), new ReturnCarFragment()};
-        adapterVP = new AdapterVP(getSupportFragmentManager(), fragments);
+        adapterVP = new AdapterVP(getSupportFragmentManager());
         mVp.setAdapter(adapterVP);
         mVp.addOnPageChangeListener(this);
         navigationview.setNavigationItemSelectedListener(this);
@@ -228,7 +224,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                         firstTime = secondTime;
                         return true;
                     } else {//两次按键小于2秒时，退出应用  
-                        System.exit(0);
+                        AppManager.getAppManager().AppExit();
                     }
 
                 }

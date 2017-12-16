@@ -1,4 +1,4 @@
-package com.yj.base;
+package com.yj.mvp.mvpbase;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import com.yj.application.AppManager;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,9 +25,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     Unbinder unbinder;
     protected LayoutInflater inflater;
     public static Toast mToast;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppManager.getAppManager().addActivity(this);
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
         mcontext = this;
@@ -59,10 +63,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         mToast.show();
     }
+
     protected void hintKbTwo() {
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        if(imm.isActive()&&getCurrentFocus()!=null){
-            if (getCurrentFocus().getWindowToken()!=null) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }

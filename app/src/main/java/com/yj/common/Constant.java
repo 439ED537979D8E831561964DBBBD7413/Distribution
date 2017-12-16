@@ -12,10 +12,7 @@ public class Constant {
     public static final int ORDER = 1;
     public static final int RETURNCAR = 2;
     public static final long EXITTIME = 2000;
-
-    public static final int TYPE_AUDIT = 2;
-    public static final int TYPE_DISTRIBTNION = 4;
-    public static final int TYPE_SUCCEED = 3;
+    public static final int[] ORDERTYPE = {2, 4, 3};
     public static final String TOKEN = "token";
     public static final String UID = "userId";
     public static final String USERNAME = "username";

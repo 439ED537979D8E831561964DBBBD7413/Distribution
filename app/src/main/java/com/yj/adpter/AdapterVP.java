@@ -1,12 +1,11 @@
 package com.yj.adpter;
 
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.yj.distribution.R;
+import com.yj.fragment.FragmentFactory;
 
 
 /**
@@ -16,30 +15,19 @@ import com.yj.distribution.R;
  */
 
 public class AdapterVP extends FragmentPagerAdapter {
-    private Fragment[] fragmentList;
-    private Context mContext;
-    public AdapterVP(FragmentManager fm, Fragment[] fragmentList) {
+
+    public AdapterVP(FragmentManager fm) {
         super(fm);
-        this.fragmentList = fragmentList;
-    }
-    public AdapterVP(FragmentManager fm, Fragment[] fragmentList, Context context) {
-        super(fm);
-        this.fragmentList = fragmentList;
-        this.mContext=context;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return fragmentList[position];
+        return FragmentFactory.createForMain(position);
     }
 
     @Override
     public int getCount() {
-        return fragmentList.length;
+        return 3;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return mContext.getResources().getStringArray(R.array.fragment_name)[position];
-    }
 }

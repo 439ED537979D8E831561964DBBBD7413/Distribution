@@ -1,4 +1,4 @@
-package com.yj.mvp.loging.view;
+package com.yj.mvp.loging;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +11,8 @@ import com.yj.common.CommonUtils;
 import com.yj.distribution.MainActivity;
 import com.yj.distribution.R;
 import com.yj.mvp.mvpbase.MVPBaseActivity;
-import com.yj.mvp.loging.contract.LoginContract;
-import com.yj.mvp.loging.presenter.LoginPresenterImpl;
+import com.yj.mvp.loging.LoginContract;
+import com.yj.mvp.loging.LoginPresenterImpl;
 
 import butterknife.BindView;
 import butterknife.OnClick;

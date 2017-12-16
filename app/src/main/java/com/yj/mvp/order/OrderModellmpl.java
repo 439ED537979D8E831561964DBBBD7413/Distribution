@@ -1,4 +1,4 @@
-package com.yj.mvp.order.model;
+package com.yj.mvp.order;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import com.lzy.okgo.model.Response;
 import com.yj.bean.OrderItem;
 import com.yj.common.CommonUtils;
 import com.yj.common.Constant;
-import com.yj.mvp.order.contract.OrderContract;
+import com.yj.mvp.order.OrderContract;
 import com.yj.other.MyThrowable;
 import com.yj.util.ShowLog;
 

@@ -3,8 +3,6 @@ package com.yj.mvp.mvpbase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.yj.base.BaseFragment;
-
 /**
  * Created by LK on 2017/12/8.
  *

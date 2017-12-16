@@ -1,4 +1,4 @@
-package com.yj.mvp.home.contract;
+package com.yj.mvp.home;
 
 import java.util.List;
 

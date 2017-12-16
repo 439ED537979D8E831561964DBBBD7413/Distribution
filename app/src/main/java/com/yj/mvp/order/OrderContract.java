@@ -1,4 +1,4 @@
-package com.yj.mvp.order.contract;
+package com.yj.mvp.order;
 
 import java.util.List;
 
